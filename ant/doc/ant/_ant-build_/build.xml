@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="wednesday" default="build" basedir=".">
+	
+	<!-- 引入外部资源文件 -->
+	<property file="build.properties" />
+	
+	<description>项目清理、编译、构建、打包</description>
+	<echo message="项目构建: 清理目录 --> 创建目录 --> 拷贝资源 --> 编译源码"></echo>
+	
+	<!-- 项目构建 -->
+	<target name="build" depends="compile, jar">
+		<description>项目构建: 清理目录 --> 创建目录 --> 拷贝资源 --> 编译源码</description>
+	</target>	
+	
+	<!-- 编译 -->
+	<target name="compile" depends="clean,mkdir,copy">
+		<description> 编译，将*.java文件编译为*.class文件</description>
+		<echo message="4. 编译，将*.java文件编译为*.class文件"></echo>		
+		<!-- 编译源码 -->
+		<javac srcdir="${src.main.java}" destdir="${output.class}">
+			<!-- 解决编译是中文乱码问题 -->
+			<compilerarg line="${javac.compile.arg.encoding}" />
+			<!-- 含有非系统jar包情况下，需要指定 jar包的目录，然后进行匹配，maven项目下无法这样实现 -->
+			<!-- <classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath> -->
+		</javac>
+		<!-- 编译测试-源码 -->
+		<javac srcdir="${src.test.java}" destdir="${output.class.test}">
+			<!-- 解决编译是中文乱码问题 -->
+			<compilerarg line="${javac.compile.arg.encoding}" />		
+		</javac>
+	</target>
+
+	<!-- 清理 -->
+	<target name="clean">
+		<description>编译之前先清理，清理classes 和 test-classses下的所有文件，包括资源文件</description>
+		<echo message="1. 清理classes 和 test-classses下的所有文件，包括资源文件"></echo>
+		<delete dir="${output.class}" />
+		<delete dir="${output.class.test}" />
+	</target>	
+
+	<!-- 创建目录 -->
+	<target name="mkdir">
+		<description> 创建目录: 在target目录下分别创建 classes/test-classes目录</description>
+		<echo message="2. 创建目录: 在target目录下分别创建 classes/test-classes目录"></echo>
+		<mkdir dir="${output.class}"/>
+		<mkdir dir="${output.class.test}"/>
+	</target>			
+
+	<!-- 拷贝资源文件 -->
+	<target name="copy">
+		<description> 将资源文件，分别拷贝到classes、test-classes目录</description>
+		<echo message="3. 将资源文件，分别拷贝到classes、test-classes目录"></echo>
+		<!-- 拷贝资源文件 -->
+		<copy todir="${output.class}">
+			<fileset dir="${src.main.resources}"></fileset>
+		</copy>
+		<!-- 拷贝测试-资源文件 -->
+		<copy todir="${output.class.test}">
+			<fileset dir="${src.test.resources}"></fileset>
+		</copy>		
+	</target>	
+	
+	<!-- 打包 -->
+	<target name="jar">
+		<description> 将target下classes或test-classes打包成jar文件</description>
+		<echo message="5. 将target下classes或test-classes打包成jar文件"></echo>
+		<!--  -->
+		<jar destfile="${output.jar}/${project.name}.jar" basedir="${output.class}"></jar>
+	</target>	
+	
+</project>

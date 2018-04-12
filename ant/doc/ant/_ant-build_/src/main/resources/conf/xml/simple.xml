@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="prjNname" default="targetName">
+
+	<!-- target item -->
+	<target name="targetName">
+		<description> target description</description>
+	</target>
+	
+	
+</project>

@@ -1,0 +1,59 @@
+
+
+windows 下 设置 %ANT_HOME%\bin到 PATH变量
+
+ant –buildfile build.xml(默认名称，不指定该参数则使用此名称) targetName值
+例如 ant myTarget 或 ant -buildfile xx.xml myTarget 或 ant -file xx.xml myTarget
+
+需要查看project下的所有target，可以输入 ant -projecthelp
+
+ant内置属性
+basedir: 项目的绝对路径.
+ant.file: buildfile 的绝对路径
+ant.version: ant的版本
+ant.project.name: 当前指定的项目的名称
+ant.java.version: jdk的版本
+
+<property name="name" value="amigo"/>
+<property name="age" value="25"/>
+我们设置了名为name和age的两个属性，这两个属性设置后，读者在下文中可以通过${name}和${age}分别取得这两个属性的值。
+
+
+ant常用任务
+1. copy任务
+
+2. delete任务
+3. mkdir
+4. move
+5. echo 根据日志或监控级别输出信息
+<echo message="Hello,Amigo" file="logs/system.log" append="true">
+
+实际应用
+1. 使用ant的javac任务来编译java程序
+根据src目录，编译之后放入classes目录，编译之前先清空classes目录，
+
+
+
+参考示例
+http://www.cnblogs.com/cyjch/archive/2012/03/28/2420761.html
+
+
+0. project元素
+project是ant构建文件的根元素，ant构建文件至少应该包含一个project元素，否则将会发生错误，在每个project元素下，
+可包含多个target元素.
+name属性: 用于指定project元素的名称.
+default属性: 用于指定project默认执行时所执行的target名称.
+basedir属性: 用于指定基路径的位置，该属性没有设置时，使用ant构建文件父目录作为基准目录，一般设置为 [.] .
+
+1.target元素
+depends属性: 用于描述target之间的依赖关系，存在多个则用逗号隔开，ant将按照顺序来执行每个target，
+被依赖的target会先执行.
+if属性: 用于验证指定的属性是否存在，若不存在，所在的target将不会执行.
+unless属性: 该属性的功能与if属性刚好相反，也用于验证指定的属性是否不存在，若不存在，所在的target将会被执行.
+
+2.property元素
+该元素可看作变量或者参数的定义，project的属性可以通过property元素来设定，也可以在ant之外设定，通过引入外部properties文件
+来实现: <property file="xx.properties" /> ，引用变量 ${var_name}
+
+
+

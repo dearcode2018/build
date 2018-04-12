@@ -1,0 +1,18 @@
+
+
+
+
+
+
+
+mvn install:install-file -Dfile=D:\mvn\spring-context-support-3.1.0.RELEASE.jar -DgroupId=org.springframework -DartifactId=spring-context-support -Dversion=3.1.0.RELEASE -Dpackaging=jar
+
+
+
+mvn install:install-file -Dfile=JAR文件路径 -DgroupId= -DartifactId= -Dversion= -Dpackaging=jar
+
+
+mvn install:install-file -Dfile=JAR文件路径 -DgroupId= -DartifactId= -Dversion= -Dpackaging=jar
+
+
+

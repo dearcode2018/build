@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="prjNname" default="targetName1">
+
+	<!-- target item -->
+	<target id=""  name="targetName1" if="" unless="" depends="" extensionOf="">
+		<description></description>
+		<ant></ant>
+		<antcall></antcall>
+		<antlr target=""></antlr>
+		<antstructure output=""/>
+		<antversion />
+		<apitooling.analysis />
+		<apitooling.analysis_reportconversion/>
+		<apitooling.apiconsumer_reportconversion/>
+		<apitooling.apideprecation/>
+		<apitooling.apideprecation_reportconversion/>
+		<apitooling.apifreeze/>
+		<apitooling.apifreeze_reportconversion/>
+		<apitooling.apigeneration/>
+		<apitooling.apimigration/>
+		<delete>
+		<fileset dir="dir">
+		    <include name="include"/>
+		    <exclude name="exclude"/>
+			</fileset>
+		</delete>
+
+	</target>
+	
+	<!-- target item -->
+	<target id=""  name="targetName2" if="" unless="" depends="" extensionOf="">
+		<mkdir dir=""/>
+		<move>
+			<!-- -->
+			<fileset></fileset>
+		</move>
+		<delete>
+		<fileset dir="dir">
+		    <include name="include"/>
+		    <exclude name="exclude"/>
+			</fileset>
+		</delete>
+		<attrib file="" readonly=""></attrib>
+		
+		<available classname="" property=""></available>
+		
+		<union/>
+		
+		<!-- 解压/解包 -->
+		<unzip dest=""></unzip>
+		<unjar></unjar>
+		<unpackagemapper/>
+		<unwar></unwar>
+		<untar></untar>
+		
+		<zip destfile=""></zip>
+		<zipentry/>
+		<zipfileset></zipfileset>
+		
+		<augment/>
+		
+		
+		
+		<war destfile=""></war>
+		<telnet server=""></telnet>
+		<concat></concat>
+	</target>
+	
+</project>

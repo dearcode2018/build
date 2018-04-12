@@ -1,0 +1,39 @@
+
+
+提供 类、源码 jar包，通过对应的groupId artifactId version 等参数来将jar包安装到本地仓库，
+mvn install:install-file -Dfile=JAR文件路径 -DgroupId= -DartifactId= -Dversion= -Dpackaging=jar
+
+
+mvn install:install-file 
+
+mvn install:install-file -Dfile=%jarPath% -DgroupId=%groupId% -DartifactId=%artifactId% -Dversion=%version% -Dpackaging=%packaging%
+
+mvn install:install-file -Dfile=%jarPath% -DgroupId=%groupId% -DartifactId=%artifactId% -Dversion=%version% -Dpackaging=%packaging% -Dclassifier=sources
+
+
+
+
+mvn install:install-file -Dfile=JAR文件路径 -DgroupId= -DartifactId= -Dversion= -Dpackaging=jar
+
+
+mvn install:install-file -Dfile=JAR文件路径 -DgroupId= -DartifactId= -Dversion= -Dpackaging=jar
+
+
+
+name=spring-context-support-3.1.0.RELEASE
+groupId=org.springframework
+artifactId=context
+version=3.1.0.RELEASE
+
+classJar=spring-context-support-3.1.0.RELEASE.jar
+sourceJar=spring-context-support-3.1.0.RELEASE-sources.jar
+
+propeties 中的格式 (直接用name作为key)
+spring-context-support-3.1.0.RELEASE=org.springframework | context | 3.1.0.RELEASE
+
+# spring-context-support-3.1.0.RELEASE = org.springframework | context | 3.1.0.RELEASE
+
+
+
+mvn install:install-file -Dfile=aa -DgroupId=com.hua -DartifactId=common -Dversion=0.0.2 -Dpackaging=jar
+
