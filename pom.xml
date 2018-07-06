@@ -12,7 +12,9 @@
 		<!-- 模板 -->
 		<module>ant</module>		
 		<module>build</module>		
+		<module>build-template</module>
 		<module>classpath</module>		
+		<module>jenkins</module>
 		<module>maven</module>		
 		<module>maven-build</module>		
 		<module>maven-config</module>		
