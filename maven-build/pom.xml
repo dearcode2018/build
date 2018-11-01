@@ -12,6 +12,9 @@
 	<name>maven-build</name>
 	
 	<properties>
+		<!-- 传参方式: 
+		mvn <阶段...> -Dname=value
+		mvn <阶段...> -Denv=xx  -->
 		<env>dev</env>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.version>0.0.1</maven.version>
@@ -51,5 +54,35 @@
 		</dependency>
 		
 	</dependencies>
+	
+	<!-- 通过 mvn <阶段...> -Pxx 来激活指定的profile，xx即为要激活的profile -->
+	<profiles>
+		<profile>
+			<id>test</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<phase>test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<tasks>
+										<echo>Using test properties</echo>
+										<copy file="src/main/resources/filter/filter-test.properties" tofile="${project.build.outputDirectory/test.properties}" overwrite="true" />
+									</tasks>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
