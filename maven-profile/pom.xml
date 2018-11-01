@@ -6,7 +6,7 @@
 		<groupId>com.hua</groupId>
 		<artifactId>build-entire</artifactId>
 		<version>0.0.1</version>
-	</parent>	>
+	</parent>
 	<artifactId>maven-profile</artifactId>
 	<packaging>jar</packaging>
 	<name>maven-profile</name>
