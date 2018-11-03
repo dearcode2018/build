@@ -59,7 +59,7 @@ public final class MavenTest extends BaseTest {
 	@Test
 	public void testMaven() {
 		try {
-			
+			System.out.println("MavenTest.testMaven()");
 			
 		} catch (Exception e) {
 			log.error("testMaven =====> ", e);
