@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 
+  http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+	<id>assembly</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<!-- 是否包含基本目录 -->
+	<includeBaseDirectory>true</includeBaseDirectory>
+	<!-- 是否包含站点目录 -->
+	<includeSiteDirectory>false</includeSiteDirectory>
+	<fileSets>
+		<fileSet>
+			<directory>src/main/resources/some</directory>
+			<!-- 文件的权限，输出后到linux系统可以直接拥有的权限 -->
+			<fileMode>775</fileMode>
+			<!-- 输出目录 -->
+			<outputDirectory>some1</outputDirectory>
+		</fileSet>
+		
+		<fileSet>
+			<directory>doc/shell</directory>
+			<!-- 文件的权限，输出后到linux系统可以直接拥有的权限 -->
+			<fileMode>774</fileMode>
+			<!-- 输出目录 -->
+			<outputDirectory>bin</outputDirectory>
+			<!-- 避免在unix类系统因为编码错误导致无法运行 -->
+			<lineEnding>unix</lineEnding>			
+		</fileSet>
+		
+		<fileSet>
+			<directory>src/main/resources/filter</directory>
+			<includes>
+				<include>**/filter-*.properties</include>
+			</includes>
+			<fileMode>775</fileMode>
+			<outputDirectory>conf</outputDirectory>
+			<!-- 
+			 "keep" - Preserve all line endings 
+	- "unix" - Use Unix-style line endings (i.e. "\n") 
+	- "lf" - Use a single line-feed line endings (i.e. "\n") 
+	- "dos" - Use DOS-/Windows-style line endings (i.e. "\r
+	 \n") 
+	- "windows" - Use DOS-/Windows-style line endings (i.e. 
+	 "\r\n") 
+	- "crlf" - Use carriage-return, line-feed line endings (i.e. 
+	 "\r\n") 
+			 -->
+			<lineEnding>unix</lineEnding>
+			
+		</fileSet>
+	</fileSets>
+	
+	<!-- 依赖集合 -->
+	<dependencySets>
+		<dependencySet>
+			<!-- 依赖输出的目录 (包含 项目依赖和当前项目打成的jar包) -->
+			<outputDirectory>lib</outputDirectory>
+		</dependencySet>
+	</dependencySets>
+	
+	<moduleSets>
+		<moduleSet>
+		</moduleSet>
+	</moduleSets>
+	
+</assembly>

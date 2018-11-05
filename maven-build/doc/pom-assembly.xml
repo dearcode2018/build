@@ -30,7 +30,6 @@
 
 	<!-- 项目构建 -->
 	<build>
-		<!-- 过滤器，key=value，对需要过滤的文件进行value的替换 -->
 		<filters>
 			<filter>src/main/resources/filter/filter-${env}.properties</filter>
 		</filters>
@@ -38,9 +37,9 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
-				<!-- 排除过滤器文件，无需执行过滤 -->
+				<!-- 排除过滤器文件 -->
 				<excludes>
-					<exclude>*/filter-*.properties</exclude>
+					<exclude>*/*-${env}.properties</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -419,30 +418,5 @@
 			<url>http://172.25.38.70:8081/nexus/content/repositories/myrepo</url>
 		</repository>
 	</distributionManagement>
-	
-	<!-- 插件仓库配置 -->
-	<pluginRepositories>
-		<pluginRepository>
-			<id>alfresco-public</id>
-			<name>alfresco-public</name>
-			<url>https://artifacts.alfresco.com/nexus/content/groups/public</url>
-		</pluginRepository>
-	
-		<pluginRepository>
-			<id>alfresco-public-snapshots</id>
-			<url>https://artifacts.alfresco.com/nexus/content/groups/public-snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>daily</updatePolicy>
-			</snapshots>
-		</pluginRepository>
-	
-		<pluginRepository>
-			<id>beardedgeeks-releases</id>
-			<url>http://beardedgeeks.googlecode.com/svn/repository/releases</url>
-		</pluginRepository>  	
-		  
-	</pluginRepositories>	
-	
 	
 </project>
