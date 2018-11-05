@@ -23,7 +23,8 @@
 		<maven.plugin.resources.version>2.7</maven.plugin.resources.version>
 		<maven.plugin.dependency.version>2.10</maven.plugin.dependency.version>
 		<maven.plugin.war.version>3.0</maven.plugin.war.version>		
-		
+		<tomcat.plugin.version>3.0-r1756463</tomcat.plugin.version>
+		<jetty.plugin.version>9.4.12.v20180830</jetty.plugin.version>
 		<web.version>0.0.1</web.version>
 	</properties>
 
@@ -140,7 +141,7 @@
 				</configuration>
 			</plugin>
 
-		<!-- 测试用例插件，打包当前项目相关文件 -->
+			<!-- 测试用例插件，打包当前项目相关文件 -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven.plugin.surefire.version}</version>
@@ -172,7 +173,7 @@
 			<plugin>
 			    <groupId>org.apache.tomcat.maven</groupId>
 			    <artifactId>tomcat8-maven-plugin</artifactId>
-			    <version>3.0-r1756463</version>
+			    <version>${tomcat.plugin.version}</version>
 			    <configuration>
 			    	<!--  -->
 					<url>http://172.25.32.85:7070/manager/text</url>
@@ -181,10 +182,26 @@
 					<update>true</update>
 					<!-- 项目名称，若在ROOT下则为单个斜杠 -->
 					<path>/maven-build-web</path>
-					
 			    </configuration>
 			</plugin>	
-
+			
+			<!-- jetty 插件，运行 mvn jetty:run -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.plugin.version}</version>
+				<configuration>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<!-- jetty 端口 -->
+					<httpConnector>
+						<!-- 只能部署到本地 -->
+						<!-- <host>192.168.5.2</host> -->
+		<!-- 				<host>127.0.0.1</host> -->
+						<port>8080</port>
+					</httpConnector>
+				</configuration>
+			</plugin>
+		
 		</plugins>
 	</build>
 
