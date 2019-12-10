@@ -1,0 +1,144 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.hua</groupId>
+		<artifactId>build-entire</artifactId>
+		<version>0.0.1</version>
+	</parent>	
+	<artifactId>maven-assembly</artifactId>
+	<packaging>jar</packaging>
+	<name>maven-assembly</name>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.version>0.0.1</maven.version>
+		<assembly.version>3.1.1</assembly.version>
+   <appassembler.plugin.version>2.0.0</appassembler.plugin.version>		
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hua</groupId>
+			<artifactId>maven</artifactId>
+			<version>${maven.version}</version>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${assembly.version}</version>
+                     <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>               
+                <configuration>
+                	<descriptors>
+                		<!-- 配置路径 -->
+                		<descriptor>src/main/resources/assembly.xml</descriptor>
+                	</descriptors>
+                </configuration>
+            </plugin>		
+            
+                <!-- 跨平台启动脚本生成插件 -->
+               <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>appassembler-maven-plugin</artifactId>
+                    <version>${appassembler.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>generate-jsw-scripts</id>
+                            <inherited>true</inherited>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>generate-daemons</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <binFolder>bin</binFolder>
+                        <configurationDirectory>conf</configurationDirectory>
+                        <repositoryName>lib</repositoryName>
+                        <configurationSourceDirectory>src/main/config</configurationSourceDirectory>
+                        <copyConfigurationDirectory>true</copyConfigurationDirectory>
+                        <filterConfigurationDirectory>true</filterConfigurationDirectory>
+                        <useWildcardClassPath>true</useWildcardClassPath>
+                        <repositoryLayout>flat</repositoryLayout>
+                        <encoding>UTF-8</encoding>
+                        <defaultJvmSettings>
+                            <initialMemorySize>2048</initialMemorySize>
+                            <maxMemorySize>2048</maxMemorySize>
+                            <extraArguments>
+                                <extraArgument>-XX:NewRatio=4</extraArgument>
+                                <extraArgument>-XX:SurvivorRatio=8</extraArgument>
+                                <extraArgument>-Xss2M</extraArgument>
+                                <extraArgument>-server</extraArgument>
+                            </extraArguments>
+                            <systemProperties>
+                                <systemProperty>java.security.policy=conf/policy.all</systemProperty>
+                            </systemProperties>
+                        </defaultJvmSettings>
+                        <daemons>
+                            <daemon>
+                                <id>app</id>
+                                <wrapperMainClass>org.tanukisoftware.wrapper.WrapperSimpleApp</wrapperMainClass>
+                                <mainClass>${main.class}</mainClass>
+                                <platforms>
+                                    <platform>jsw</platform>
+                                </platforms>
+                                <generatorConfigurations>
+                                    <generatorConfiguration>
+                                        <generator>jsw</generator>
+                                        <includes>
+                                            <include>linux-x86-32</include>
+                                            <include>linux-x86-64</include>
+                                            <include>windows-x86-32</include>
+                                            <include>windows-x86-64</include>
+                                        </includes>
+                                        <configuration>
+                                            <property>
+                                                <name>configuration.directory.in.classpath.first</name>
+                                                <value>conf</value>
+                                            </property>
+                                            <property>
+                                                <name>set.default.REPO_DIR</name>
+                                                <value>lib</value>
+                                            </property>
+                                            <property>
+                                                <name>wrapper.logfile</name>
+                                                <value>/data/logs/${project.name}/wrapper.log</value>
+                                            </property>
+                                            <property>
+                                                <name>wrapper.pidfile</name>
+                                                <value>/data/logs/${project.name}</value>
+                                            </property>
+                                            <property>
+                                                <name>wrapper.console.title</name>
+                                                <value>WeHotel-Trip</value>
+                                            </property>
+                                            <property>
+                                                <name>wrapper.ping.timeout</name>
+                                                <value>120</value>
+                                            </property>
+                                        </configuration>
+                                    </generatorConfiguration>
+                                </generatorConfigurations>
+                            </daemon>
+                        </daemons>
+                    </configuration>
+                </plugin>
+            
+            
+		</plugins>
+	</build>
+
+</project>

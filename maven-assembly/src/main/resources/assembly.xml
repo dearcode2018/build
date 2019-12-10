@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+
+    <id>assembly</id>
+	
+	<formats>
+			<!-- tar.gz, zip -->
+		<format>zip</format>
+	</formats>
+	
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <fileSets>
+        <fileSet>
+        	<!-- 要压缩的目录 -->
+            <directory>src/main/resources/bin</directory>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+            <!-- 压缩包中的相对路径，不指定则默认为资源所在的路径(src/main/resources/bin) -->
+            <outputDirectory>\</outputDirectory>
+            <!--     <outputDirectory>\bin2</outputDirectory> -->
+        </fileSet>
+
+    </fileSets>
+
+
+
+</assembly>

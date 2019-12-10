@@ -16,6 +16,7 @@
 		<module>classpath</module>		
 		<module>jenkins</module>
 		<module>maven</module>		
+		<module>maven-assembly</module>
 		<module>maven-build</module>		
 		<module>maven-build-web</module>
 		<module>maven-config</module>
