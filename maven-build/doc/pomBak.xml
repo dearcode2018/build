@@ -166,9 +166,149 @@
 				</configuration>
 			</plugin>			
 			
+			<!-- 输出依赖jar包到指定目录，在Goals 中输入: dependency:copy-dependencies -->
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<configuration>
+					<!-- 是否包含间接依赖包，选择 false 才能输出当前项目所有依赖的包 -->
+					<excludeTransitive>false</excludeTransitive>
+					<outputDirectory>${project.build.directory}/lib</outputDirectory>
+					<!-- 是否去掉版本信息 -->
+					<stripVersion>false</stripVersion>
+					<!-- 是否跳过，为true则关闭该插件 -->
+					<skip>true</skip>
+				</configuration>
+				<!-- 放入执行 -->
+				<executions>
+					<execution>
+						<id>copy</id>
+						<!-- 指定执行的阶段 -->
+						<phase>package</phase>
+						<!-- 拷贝依赖 -->
+						<goals>
+							<goal>copy-dependencies</goal>						
+						</goals>
+						<configuration>
+						<!-- 	<outputDirectory>${project.build.directory}/lib</outputDirectory> -->
+							<!-- 是否包含间接依赖包，选择 false 才能输出当前项目所有依赖的包 -->
+						<!-- 	<excludeTransitive>false</excludeTransitive> -->
+							<!-- 是否去掉版本信息 -->
+							<!-- <stripVersion>false</stripVersion>	 -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>		
 			
+			<!-- 组装插件: 将所有依赖的文件解压出来，组装成一个jar文件 -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>${maven.plugin.assembly.version}</version>
+				<configuration>
+					<!-- 开关 -->
+					<skipAssembly>false</skipAssembly>
+					<descriptors>
+						<!-- 配置文件位置 -->
+						<descriptor>src/main/resources/META-INF/assembly.xml</descriptor>
+					</descriptors>
+					<!-- 指定文件的编码 -->
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<archive>
+						<manifest>
+							<!-- 打包时 MANIFEST.MF文件不记录时间戳版本 -->
+							<useUniqueVersions>false</useUniqueVersions>
+							<!-- 在META-INF/MANIFEST.MF中显示 -->
+							<packageName>xx.jar</packageName>
+							<!-- 所有依赖的都打成一个包了，无需再另外设置classpath -->
+							<addClasspath>false</addClasspath>
+							<!-- 主方法 -->
+							<mainClass>com.hua.maven.BuildMain</mainClass>
+						</manifest>
+						<manifestEntries>
+						</manifestEntries>
+					</archive>	
+					<!-- 注释掉descriptionRefs就不会生成 jar-with-dependencies jar包-->				
+<!-- 					<descriptorRefs>
+						生成一个包的后缀名称
+						 <descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs> -->
+				</configuration>		
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<!-- 组装为单个包 -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>	
 			
+			<!-- 带主类的jar包 -->
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- 打包时 MANIFEST.MF文件不记录时间戳版本 -->
+							<useUniqueVersions>false</useUniqueVersions>
+							<!-- 在META-INF/MANIFEST.MF中显示 -->
+							<packageName>xx.jar</packageName>
+							<addClasspath>true</addClasspath>
+							<!-- 设置classpath前缀，在META-INF/MANIFEST.MF中Class-Path体现出来 -->
+							<classpathPrefix>lib/</classpathPrefix>
+							<!-- 主方法 -->
+							<mainClass>com.hua.maven.BuildMain</mainClass>
+						</manifest>
+						<manifestEntries>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 			
+			<!-- maven部署插件 部署到本地，配合上传构件到github仓库 -->
+			<plugin>
+			    <artifactId>maven-deploy-plugin</artifactId>		
+	<!-- 		    <version>3.0.0-M1</version>		 -->
+			    <configuration>
+			    	<altDeploymentRepository>
+			    		internal.repo::default::file://${project.build.directory}/maven-repo
+			    	</altDeploymentRepository>
+			    </configuration>
+			</plugin>
+			
+			<!-- 上传构件到github -->
+			<plugin>
+			    <groupId>com.github.github</groupId>
+			    <artifactId>site-maven-plugin</artifactId>
+			    <version>${github.plugin.site.version}</version>
+			    <configuration>
+			    	<!-- 和 settings.xml中的server id对应，匹配帐号密码 -->
+			    	<server>github.repo</server>
+			    	<!-- github 仓库所有者 -->
+			    	<repositoryOwner>dearcode2018</repositoryOwner>
+			    	<!-- 仓库名称 -->
+			    	<repositoryName>maven-repo</repositoryName>
+			    	<message>Maven artifacts for ${project.version}</message>
+			    	<!--  -->
+			    	<noJekyll>true</noJekyll>
+			    	<!-- 本地部署的位置，将该路径下的构件上传到github仓库 -->
+			    	<outputDirectory>${project.build.directory}/maven-repo</outputDirectory>
+			    	<!-- 分支 -->
+			    	<branch>refs/heads/master</branch>
+			    	<merge>true</merge>
+			    	<includes>
+			    		<include>**/*</include>
+			    	</includes>
+			    </configuration>
+			    <executions>
+			    	<execution>
+			    		<goals>
+			    			<goal>site</goal>
+			    		</goals>
+			    		<phase>deploy</phase>
+			    	</execution>
+			    </executions>
+			</plugin>
 			
 		</plugins>
 		
@@ -276,7 +416,7 @@
 			<name>company nexus repository.hosted repository</name>
 			<uniqueVersion>false</uniqueVersion>
 			<!-- 远程仓库的地址 -->
-			<url>http://172.25.38.70:8081/nexus/content/repositories/thirdparty</url>
+			<url>http://172.25.38.70:8081/nexus/content/repositories/myrepo</url>
 		</repository>
 	</distributionManagement>
 	
