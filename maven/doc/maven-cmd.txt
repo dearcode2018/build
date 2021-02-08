@@ -16,3 +16,10 @@ mvn install:install-file -Dfile=JAR文件路径 -DgroupId= -DartifactId= -Dversi
 
 
 
+
+
+
+
+
+
+

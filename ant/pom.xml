@@ -5,31 +5,25 @@
 	<parent>
 		<groupId>com.hua</groupId>
 		<artifactId>build-entire</artifactId>
-		<version>0.0.1</version>
+		<version>1.0.0</version>
 	</parent>	
 	<artifactId>ant</artifactId>
 	<packaging>jar</packaging>
 	<name>ant</name>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
-		<build.version>0.0.1</build.version>
-		<!-- ant -->
-		<apache.ant.version>1.9.4</apache.ant.version>		
+
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.hua</groupId>
-			<artifactId>build</artifactId>
-			<version>${build.version}</version>
+			<artifactId>build-core</artifactId>
 		</dependency>
 
 		<!-- ant -->
 		<dependency>
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant</artifactId>
-			<version>${apache.ant.version}</version>
 		</dependency>
 		
 	</dependencies>

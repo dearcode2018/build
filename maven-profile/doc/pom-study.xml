@@ -5,7 +5,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.version>3.2.5</maven.version>
-		<common.version>0.0.1</common.version>
+		<common.version>1.0.0</common.version>
 	</properties>
 	
 	<!-- 父项目，父项目中指定的值就是此项目中未指定的值的默认值 -->
@@ -31,7 +31,7 @@
 	<!-- 项目的名称 -->
 	<name>maven</name>
 	<!-- 此项目产生的artifact当前版本 -->
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<!-- 项目描述，被maven用来需要的地方描述该项目，例如 web站点，此元素可以使用CDATA 让内容可以包含html标签 -->
 	<description>project description</description>
 	<!-- 该项目的主页 home page -->

@@ -6,6 +6,7 @@
  */
 package com.hua.driver;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 import com.hua.bean.LoadProjectParam;
@@ -27,7 +28,7 @@ public class MavenDriver
 {
 	
 	/* jar install 模板文件的路径 */
-	private static final String jarInstallTemplateFilePath = ClassPathUtil.getClassSubpath("/conf/bat/JarInstall.bat");
+	private static final String jarInstallTemplateFilePath = ClassPathUtil.getClassPath("/conf/bat/JarInstall.bat");
 	
 	/**
 	 * 因为不需要去执行bat下的脚本，因此把bat目录隐藏起来
@@ -75,11 +76,11 @@ public class MavenDriver
 				for (ProjectInfo info : infos)
 				{
 					// 获取模板文件的内容 注意 bat 文件应该使用中文编码
-					content = FileUtil.getString(jarInstallTemplateFilePath, Constant.CHART_SET_GB2312);
+					content = FileUtil.getString(jarInstallTemplateFilePath, Charset.forName(Constant.CHART_SET_GB2312));
 					// 进行内容替换
 					content = content.replace(MavenConstant.MVN_INSTALL_BAT_REPLACE_SYMBOL, info.getClassOrder());
 					// 输出到指定的文件，注意 bat 文件应该使用中文编码
-					FileUtil.writeString(jarInstallFilePath, content, Constant.CHART_SET_GB2312);
+					FileUtil.writeString(jarInstallFilePath, content, Constant.CHART_SET_GB2312, false);
 					
 					// 调用 windows bat 脚本
 					command = "cmd /c start " + mavenInstallPath;
@@ -97,11 +98,11 @@ public class MavenDriver
 					Thread.sleep(1 * 1000);
 					
 					// 获取模板文件的内容 注意 bat 文件应该使用中文编码
-					content = FileUtil.getString(jarInstallTemplateFilePath, Constant.CHART_SET_GB2312);
+					content = FileUtil.getString(jarInstallTemplateFilePath, Charset.forName(Constant.CHART_SET_GB2312));
 					// 进行内容替换
 					content = content.replace(MavenConstant.MVN_INSTALL_BAT_REPLACE_SYMBOL, info.getSourceOrder());
 					// 输出到指定的文件，注意 bat 文件应该使用中文编码
-					FileUtil.writeString(jarInstallFilePath, content, Constant.CHART_SET_GB2312);
+					FileUtil.writeString(jarInstallFilePath, content, Constant.CHART_SET_GB2312, false);
 					
 					// 调用 windows bat 脚本
 					command = "cmd /c start " + mavenInstallPath;

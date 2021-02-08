@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.hua</groupId>
 		<artifactId>build-entire</artifactId>
-		<version>0.0.1</version>
+		<version>1.0.0</version>
 	</parent>	
 	<artifactId>maven-assembly</artifactId>
 	<packaging>jar</packaging>
@@ -13,7 +13,7 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.version>0.0.1</maven.version>
+		<maven.version>1.0.0</maven.version>
 		<assembly.version>3.1.1</assembly.version>
    <appassembler.plugin.version>2.0.0</appassembler.plugin.version>		
 	</properties>
@@ -21,8 +21,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.hua</groupId>
-			<artifactId>maven</artifactId>
-			<version>${maven.version}</version>
+			<artifactId>build-core</artifactId>
 		</dependency>
 		
 	</dependencies>
