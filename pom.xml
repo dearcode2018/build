@@ -1,76 +1,190 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.hua</groupId>
-  <artifactId>build-entire</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
-  <name>build-entire</name>
-  <description>build Maven Entire Project</description>
-  
-  	<!-- 模块-子项目 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.hua</groupId>
+	<artifactId>build-entire</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<name>build-entire</name>
+	<description>build Maven Entire Project</description>
+
+	<!-- 模块-子项目 -->
 	<modules>
 		<!-- 模板 -->
-		<module>ant</module>		
-		<module>build-core</module>		
+		<module>build-core</module>
 		<module>build-template</module>
-		<module>classpath</module>		
 		<module>jenkins</module>
-		<module>maven</module>		
+		<module>maven</module>
 		<module>maven-assembly</module>
-		<module>maven-build</module>		
-		<module>maven-build-web</module>
-		<module>maven-config</module>
-		<module>maven-github</module>		
-		<module>maven-module</module>	
-		<module>maven-plugin</module>		
-		<module>maven-profile</module>		
-		<module>maven-repo</module>		
-		<module>maven3</module>		
+		<module>maven-github</module>
+		<module>maven-plugin-usage</module>
+		<module>maven-plugin-compiler</module>
+		<module>maven-plugin-resources</module>
+		<module>maven-plugin-spring-boot</module>
+		<module>maven-plugin-custom</module>
 	</modules>
- 
+
 	<!-- 公共属性 -->
 	<properties>
 		<jdk.version>1.8</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.version>1.0.0</maven.version>
-		<maven.plugin.compiler.version>3.3</maven.plugin.compiler.version>
-		<maven.plugin.source.version>2.4</maven.plugin.source.version>
-		<maven.plugin.surefire.version>2.18.1</maven.plugin.surefire.version>
+		<apache.ant.version>1.9.4</apache.ant.version>
+		<maven.plugin.compiler.version>3.8.1</maven.plugin.compiler.version>
+		<maven.plugin.source.version>3.2.1</maven.plugin.source.version>
+		<maven.plugin.resources.version>3.2.0</maven.plugin.resources.version>
+		<maven.plugin.surefire.version>3.0.0-M5</maven.plugin.surefire.version>
 		<maven.plugin.assembly.version>2.5.5</maven.plugin.assembly.version>
-		<maven.plugin.resources.version>2.7</maven.plugin.resources.version>
-		<maven.plugin.dependency.version>2.10</maven.plugin.dependency.version>
-		<maven.plugin.war.version>3.0</maven.plugin.war.version>
 		<build.version>1.0.0</build.version>
-		<!-- ant -->
-		<apache.ant.version>1.9.4</apache.ant.version>	
-		<common.version>1.0.0</common.version>					
-	</properties>  
-  
- 	<dependencyManagement>
- 		<dependencies>
- 		<dependency>
-			<groupId>com.hua</groupId>
-			<artifactId>build-core</artifactId>
-			<version>${build.version}</version>
-		</dependency>
+		<common.version>1.0.0</common.version>
+		<com.hua.maven.version>1.0.0</com.hua.maven.version>
+		<maven.custom-plugin.version>1.0.0</maven.custom-plugin.version>
+		<maven.plugin.version>3.6.3</maven.plugin.version>
+		<maven.plugin.annotation.version>3.6.0</maven.plugin.annotation.version>
+		<maven.plugin-plugin.version>3.6.0</maven.plugin-plugin.version>
+		<maven.plugin.clean.version>3.1.0</maven.plugin.clean.version>
+		<maven.plugin.install.version>3.0.0-M1</maven.plugin.install.version>
+		<maven.plugin.dependency.version>3.1.2</maven.plugin.dependency.version>
+		<maven.plugin.spring-boot.version>2.3.8.RELEASE</maven.plugin.spring-boot.version>
+		<slf4j.version>2.0.0-alpha1</slf4j.version>
+		<custom.name>哈哈哈ddd</custom.name>
+	</properties>
 
-		<!-- ant -->
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>${apache.ant.version}</version>
-		</dependency>	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hua</groupId>
+				<artifactId>build-core</artifactId>
+				<version>${build.version}</version>
+			</dependency>
+
+			<!-- ant -->
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>${apache.ant.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hua</groupId>
+				<artifactId>common</artifactId>
+				<version>${common.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hua</groupId>
+				<artifactId>maven</artifactId>
+				<version>${com.hua.maven.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${maven.plugin.spring-boot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-core</artifactId>
+				<version>${maven.plugin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-plugin-api</artifactId>
+				<version>${maven.plugin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-compat</artifactId>
+				<version>${maven.plugin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-artifact</artifactId>
+				<version>${maven.plugin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-embedder</artifactId>
+				<version>${maven.plugin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven.plugin.compiler.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven.plugin.resources.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven.plugin.source.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${maven.plugin.clean.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>${maven.plugin.install.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven.plugin.dependency.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.plugin-tools</groupId>
+				<artifactId>maven-plugin-annotations</artifactId>
+				<version>${maven.plugin.annotation.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>${maven.plugin-plugin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.hua</groupId>
+				<artifactId>maven-plugin-custom</artifactId>
+				<version>${maven.custom-plugin.version}</version>
+			</dependency>
 		
-		<dependency>
-			<groupId>com.hua</groupId>
-			<artifactId>common</artifactId>
-			<version>${common.version}</version>
-		</dependency>				
- 		</dependencies>
- 	</dependencyManagement>
- 
-  
- 	<!-- 公共构建 -->
+		</dependencies>
+	</dependencyManagement>
+
+
+	<!-- 公共构建 -->
 	<build>
 		<plugins>
 
@@ -178,5 +292,5 @@
 
 		</plugins>
 	</build>
-	
+
 </project>

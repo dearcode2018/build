@@ -1,3 +1,0 @@
-
-
-OS is ${my.os.name}

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="prjNname" default="">
-
-    <property environment="env" />
-    <property name="project.root" value="${basedir}" />
-	
-	<echo message="${env.JAVA_HOME}"></echo>
-	
-</project>

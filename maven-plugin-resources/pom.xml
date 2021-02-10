@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>com.hua</groupId>
+		<artifactId>build-entire</artifactId>
+		<version>1.0.0</version>
+	</parent>	
+	<artifactId>maven-plugin-resources</artifactId>
+	<packaging>jar</packaging>
+	<name>maven-plugin-resources</name>
+	
+	<properties>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.hua</groupId>
+			<artifactId>maven</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+		</dependency>
+		
+	</dependencies>
+
+	<!-- 项目构建 -->
+	<build>
+		<plugins>
+			<!-- 资源插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${maven.plugin.resources.version}</version>
+				<configuration>
+					<!-- 指定文件的编码 -->
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<!-- 包含空目录 -->
+					<includeEmptyDirs>true</includeEmptyDirs>
+					<!-- 是否直接覆盖 -->
+					<overwrite>true</overwrite>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+						<configuration>
+							<includeEmptyDirs>true</includeEmptyDirs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>	
+															
+		</plugins>
+	</build>	
+	
+</project>
