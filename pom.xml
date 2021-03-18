@@ -30,7 +30,7 @@
 	<properties>
 		<jdk.version>1.8</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<apache.ant.version>1.9.4</apache.ant.version>
+		<apache.ant.version>1.10.9</apache.ant.version>
 		<maven.plugin.compiler.version>3.8.1</maven.plugin.compiler.version>
 		<maven.plugin.source.version>3.2.1</maven.plugin.source.version>
 		<maven.plugin.resources.version>3.2.0</maven.plugin.resources.version>
