@@ -18,11 +18,12 @@
 		<module>maven</module>
 		<module>maven-assembly</module>
 		<module>maven-github</module>
-		<module>maven-plugin-usage</module>
 		<module>maven-plugin-compiler</module>
+		<module>maven-plugin-custom</module>
+		<module>maven-plugin-jacoco</module>
 		<module>maven-plugin-resources</module>
 		<module>maven-plugin-spring-boot</module>
-		<module>maven-plugin-custom</module>
+		<module>maven-plugin-usage</module>
 	</modules>
 
 	<!-- 公共属性 -->
@@ -46,8 +47,10 @@
 		<maven.plugin.install.version>3.0.0-M1</maven.plugin.install.version>
 		<maven.plugin.dependency.version>3.1.2</maven.plugin.dependency.version>
 		<maven.plugin.spring-boot.version>2.3.8.RELEASE</maven.plugin.spring-boot.version>
+		<jacoco.version>0.8.6</jacoco.version>
 		<slf4j.version>2.0.0-alpha1</slf4j.version>
 		<custom.name>哈哈哈ddd</custom.name>
+ 		<jmockit.version>1.46</jmockit.version>		
 	</properties>
 
 	<dependencyManagement>
@@ -179,7 +182,13 @@
 				<artifactId>maven-plugin-custom</artifactId>
 				<version>${maven.custom-plugin.version}</version>
 			</dependency>
-		
+
+			<dependency>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
